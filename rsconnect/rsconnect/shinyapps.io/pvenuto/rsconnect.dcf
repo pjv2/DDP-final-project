@@ -1,0 +1,13 @@
+name: rsconnect
+title: rsconnect
+username:
+account: pvenuto
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 302889
+bundleId: 1277813
+url: https://pvenuto.shinyapps.io/rsconnect/
+when: 1521516747.82465
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: shinyapps.io/pvenuto/mtcars.dcf

@@ -1,0 +1,63 @@
+---
+title: "Developing Data Products Course Project"
+author: "Paul Venuto"
+date: "3/19/2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+This presentation is the final project for the Coursera Developing Data Products course, which is part of the Data Science Specialization.
+
+It is an R Presentation generated with RStudio.
+
+The Shiny application pitched by this presentation is at https://pvenuto.shinyapps.io/rsconnect/
+
+The Shiny app source code is available at 
+
+## The Data
+
+-The dataset used for this Shiny App was the Swiss Fertility and Socioeconomic Indicators (1888), which recorded standard fertility measures and socioeconomic indicators for each of 47 French-speaking provinces in Switzerland in 1888.
+
+-The data frame consists of 47 observations on 6 variables, and this Shiny App focused on the relationship between 4 of those variables:
+
+     -Fertility (Ig): common standardized fertility measure.
+     -Agriculture: % of males involved in agriculture as occupation.
+     -Examination: % draftees receiving highest mark on army examination.
+     -Education: % education beyond primary school for draftees.
+
+## Swiss Dataset
+
+```{r swiss, message=FALSE}
+library(UsingR)
+library(ggplot2)
+g = ggplot(swiss, aes(x = Agriculture, y = Fertility),)
+g = g + xlab("Agriculture")
+g = g + ylab("Fertility")
+g = g + geom_point(size = 6, colour = "black", alpha = 0.2)
+g = g + geom_point(size = 5, colour = "blue", alpha = 0.2)
+g = g + geom_smooth(method = "lm", colour = "black")
+g = g + ggtitle("Fitted Regression Line - Fertility vs. Agriculture")
+g
+```
+
+## How The App Works
+
+The app uses linear regression modeling to predict Fertility based on 3 predictors:
+
+```{r, echo = TRUE, eval = FALSE}
+library(shiny)
+shinyServer(function(input, output) {
+  model1 <- lm(Fertility ~ Agriculture, data = swiss)
+  model2 <- lm(Fertility ~ Agriculture, Examination, data = swiss)
+  model3 <- lm(Fertility ~ Agriculture, Examination, Education, data = swiss)
+})
+```
+
+## Try it for yourself:
+
+https://pvenuto.shinyapps.io/rsconnect/
